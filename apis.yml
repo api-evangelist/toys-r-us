@@ -1,7 +1,12 @@
 aid: toys-r-us
-url: https://raw.githubusercontent.com/api-evangelist/toys-r-us/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/toys-r-us/refs/heads/main/apis.yml
 modified: '2026-03-24'
 apis: []
 common:
   - type: Website
     url: https://www.toys-r-us.com
+description: >-
+  Toys 'R' Us is a leading toys and juvenile-products retailer offering a vast selection
+  of toys, games, baby products, and children's apparel through retail stores and
+  e-commerce sites.
