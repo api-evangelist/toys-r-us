@@ -1,0 +1,60 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://commerceapi.io/api/v2/shipments/import",
+    "headers": {
+      "subscription-key": "{{TOYS_R_US_API_KEY}}",
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    "body": {
+      "PartnerPO": "TRU-2026-00123",
+      "ShipDate": "2026-05-03",
+      "Carrier": "UPS",
+      "ServiceLevel": "UPS Ground",
+      "Packages": [
+        {
+          "TrackingNumber": "1Z999AA10123456784",
+          "Weight": 12.5,
+          "Length": 18.0,
+          "Width": 14.0,
+          "Height": 10.0,
+          "Lines": [
+            {
+              "LineNumber": 1,
+              "Quantity": 50
+            }
+          ]
+        },
+        {
+          "TrackingNumber": "1Z999AA10123456785",
+          "Weight": 8.0,
+          "Length": 16.0,
+          "Width": 12.0,
+          "Height": 8.0,
+          "Lines": [
+            {
+              "LineNumber": 2,
+              "Quantity": 100
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "Body": {
+        "PartnerPO": "TRU-2026-00123",
+        "Key": 987654321,
+        "Status": 200
+      },
+      "Errors": [],
+      "StatusCode": 200
+    }
+  }
+}

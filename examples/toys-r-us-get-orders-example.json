@@ -1,0 +1,87 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://commerceapi.io/api/v2/orders?status=200&page=1&pageSize=25",
+    "headers": {
+      "subscription-key": "{{TOYS_R_US_API_KEY}}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "TotalResults": 2,
+      "PageSize": 25,
+      "PageNumber": 1,
+      "Body": [
+        {
+          "Key": 123456789,
+          "PartnerPO": "TRU-2026-00123",
+          "OrderDate": "2026-05-01",
+          "Status": 200,
+          "ShipToAddress": {
+            "Name": "Toys R Us Distribution Center",
+            "Address1": "100 Warehouse Blvd",
+            "Address2": null,
+            "City": "Wayne",
+            "State": "NJ",
+            "Zip": "07470",
+            "Country": "US"
+          },
+          "LineItems": [
+            {
+              "LineNumber": 1,
+              "SupplierSKU": "LEGO-42143",
+              "BuyerSKU": "TRU-980012",
+              "UPC": "673419382380",
+              "Description": "LEGO Technic Ferrari Daytona SP3",
+              "Quantity": 50,
+              "UnitPrice": 39.99,
+              "UOM": "EA"
+            },
+            {
+              "LineNumber": 2,
+              "SupplierSKU": "LEGO-76230",
+              "BuyerSKU": "TRU-980013",
+              "UPC": "673419363907",
+              "Description": "LEGO Marvel Venom Figure",
+              "Quantity": 100,
+              "UnitPrice": 9.99,
+              "UOM": "EA"
+            }
+          ]
+        },
+        {
+          "Key": 123456790,
+          "PartnerPO": "TRU-2026-00124",
+          "OrderDate": "2026-05-02",
+          "Status": 200,
+          "ShipToAddress": {
+            "Name": "Toys R Us Store #0042",
+            "Address1": "500 Main Street",
+            "Address2": null,
+            "City": "Paramus",
+            "State": "NJ",
+            "Zip": "07652",
+            "Country": "US"
+          },
+          "LineItems": [
+            {
+              "LineNumber": 1,
+              "SupplierSKU": "HASBRO-F6351",
+              "BuyerSKU": "TRU-991045",
+              "UPC": "195166131640",
+              "Description": "Transformers Studio Series Optimus Prime",
+              "Quantity": 24,
+              "UnitPrice": 24.99,
+              "UOM": "EA"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

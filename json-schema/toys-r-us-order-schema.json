@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/toys-r-us/order.json",
+  "title": "Toys R Us Order",
+  "description": "Schema for a Toys R Us purchase order (EDI 850) in the LogicBroker Commerce API format. Represents the full order document including line items, ship-to address, and order metadata.",
+  "type": "object",
+  "properties": {
+    "Key": {
+      "type": "integer",
+      "description": "Unique LogicBroker document key for the order."
+    },
+    "PartnerPO": {
+      "type": "string",
+      "description": "The Toys R Us purchase order number."
+    },
+    "OrderDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the purchase order was placed."
+    },
+    "Status": {
+      "type": "integer",
+      "description": "Current status code of the order.",
+      "examples": [200, 1000, 9000]
+    },
+    "ShipToAddress": {
+      "type": "object",
+      "description": "Destination ship-to address for the order.",
+      "properties": {
+        "Name": { "type": "string", "description": "Ship-to company or store name." },
+        "Address1": { "type": "string", "description": "Primary street address." },
+        "Address2": { "type": ["string", "null"], "description": "Secondary address line." },
+        "City": { "type": "string", "description": "City." },
+        "State": { "type": "string", "description": "State abbreviation." },
+        "Zip": { "type": "string", "description": "Postal zip code." },
+        "Country": { "type": "string", "description": "Two-letter country code.", "default": "US" }
+      },
+      "required": ["Name", "Address1", "City", "State", "Zip", "Country"]
+    },
+    "LineItems": {
+      "type": "array",
+      "description": "List of line items in the purchase order.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/OrderLineItem"
+      }
+    }
+  },
+  "required": ["PartnerPO", "LineItems"],
+  "$defs": {
+    "OrderLineItem": {
+      "type": "object",
+      "title": "Order Line Item",
+      "description": "A single product line item within a Toys R Us purchase order.",
+      "properties": {
+        "LineNumber": {
+          "type": "integer",
+          "description": "Sequential line number within the order.",
+          "minimum": 1
+        },
+        "SupplierSKU": {
+          "type": "string",
+          "description": "The vendor's internal product identifier (SKU)."
+        },
+        "BuyerSKU": {
+          "type": "string",
+          "description": "The Toys R Us product identifier."
+        },
+        "UPC": {
+          "type": "string",
+          "description": "Universal Product Code (12-digit barcode).",
+          "pattern": "^[0-9]{12}$"
+        },
+        "Description": {
+          "type": "string",
+          "description": "Product name or description."
+        },
+        "Quantity": {
+          "type": "number",
+          "description": "Ordered quantity.",
+          "minimum": 1
+        },
+        "UnitPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Unit cost per item.",
+          "minimum": 0
+        },
+        "UOM": {
+          "type": "string",
+          "description": "Unit of measure code.",
+          "examples": ["EA", "CS", "PK"]
+        }
+      },
+      "required": ["LineNumber", "Quantity"]
+    }
+  }
+}

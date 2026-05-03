@@ -1,0 +1,103 @@
+name: Toys R Us Vocabulary
+description: >-
+  Domain vocabulary for Toys R Us supplier and dropship vendor integrations
+  via the LogicBroker Commerce API. Covers order lifecycle management, product
+  catalog operations, and supply chain document exchange.
+tags:
+  - Commerce
+  - Dropship
+  - E-Commerce
+  - Retail
+  - Supply Chain
+terms:
+  - term: Purchase Order
+    abbreviation: PO
+    ediCode: "850"
+    description: >-
+      A retailer's formal request to a supplier to fulfill specific products
+      at agreed quantities and prices. The initiating document in the
+      dropship order lifecycle.
+    synonyms:
+      - Order
+      - EDI 850
+  - term: Order Acknowledgement
+    abbreviation: ACK
+    ediCode: "855"
+    description: >-
+      A supplier's response to a purchase order confirming acceptance,
+      quantity changes, backordering, or cancellation of line items.
+    synonyms:
+      - Acknowledgement
+      - EDI 855
+    ackCodes:
+      - IA: Item Accepted
+      - IQ: Item Quantity Changed
+      - IB: Item Backordered
+      - IC: Item Cancelled
+  - term: Advance Ship Notice
+    abbreviation: ASN
+    ediCode: "856"
+    description: >-
+      A notification sent by the supplier to the retailer when a shipment
+      has been dispatched. Contains tracking numbers, carrier information,
+      package dimensions, and itemized fulfillment details.
+    synonyms:
+      - Shipment Notification
+      - EDI 856
+  - term: Invoice
+    ediCode: "810"
+    description: >-
+      A billing document sent by the supplier to the retailer after shipment,
+      itemizing the products, quantities, and prices for payment processing.
+    synonyms:
+      - EDI 810
+  - term: Dropship Vendor
+    description: >-
+      A supplier who ships products directly to the end consumer on behalf
+      of Toys R Us, bypassing Toys R Us distribution centers.
+    synonyms:
+      - DSV
+      - Dropshipper
+  - term: Supplier SKU
+    description: >-
+      The product identifier assigned by the vendor/supplier in their
+      internal catalog system.
+    synonyms:
+      - Vendor SKU
+      - Supplier Part Number
+  - term: Buyer SKU
+    description: >-
+      The product identifier assigned by Toys R Us in their catalog system.
+    synonyms:
+      - Retailer SKU
+      - Partner SKU
+  - term: UPC
+    description: >-
+      Universal Product Code, a 12-digit numeric barcode used to identify
+      consumer products at retail.
+    synonyms:
+      - GTIN-12
+      - Barcode
+  - term: LogicBroker
+    description: >-
+      The commerce integration platform powering the Toys R Us supplier API.
+      Provides EDI translation, order routing, and supplier portal services.
+  - term: Subscription Key
+    description: >-
+      The API authentication credential provided by LogicBroker to authorize
+      vendor API access to the Toys R Us Commerce API.
+    synonyms:
+      - API Key
+  - term: Document Status
+    description: >-
+      A numeric code representing the current processing state of a commerce
+      document (order, shipment, invoice, acknowledgement) in the LogicBroker
+      platform.
+  - term: MSRP
+    description: >-
+      Manufacturer's Suggested Retail Price — the price at which the
+      manufacturer recommends the product be sold to consumers.
+  - term: UOM
+    description: >-
+      Unit of Measure — the counting unit for product quantities in order
+      documents. Common values include EA (each), CS (case), PK (pack).

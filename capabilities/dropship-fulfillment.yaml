@@ -1,0 +1,256 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Toys R Us Dropship Fulfillment"
+  description: "Unified dropship fulfillment workflow for Toys R Us supplier integrations. Combines order retrieval, acknowledgement, shipment notification, invoice submission, and product catalog synchronization for end-to-end dropship vendor operations."
+  tags:
+    - Commerce
+    - Dropship
+    - E-Commerce
+    - Fulfillment
+    - Order Management
+    - Retail
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TOYS_R_US_API_KEY: TOYS_R_US_API_KEY
+
+capability:
+  consumes:
+    - import: toys-r-us-commerce
+      location: ./shared/toys-r-us-commerce.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: dropship-fulfillment-api
+      description: "Unified REST API for Toys R Us dropship fulfillment workflows."
+      resources:
+        - path: /v1/orders
+          name: orders
+          description: "Retrieve open purchase orders for fulfillment"
+          operations:
+            - method: GET
+              name: get-orders
+              description: "Retrieve purchase orders awaiting fulfillment"
+              call: "toys-r-us-commerce.get-orders"
+              with:
+                status: "rest.status"
+                page: "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/orders/{key}
+          name: order
+          description: "Retrieve a specific order by key"
+          operations:
+            - method: GET
+              name: get-order
+              description: "Retrieve a single purchase order"
+              call: "toys-r-us-commerce.get-order"
+              with:
+                key: "rest.key"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/acknowledgements
+          name: acknowledgements
+          description: "Submit order acknowledgements"
+          operations:
+            - method: POST
+              name: create-acknowledgement
+              description: "Submit an order acknowledgement"
+              call: "toys-r-us-commerce.create-acknowledgement"
+              with:
+                partner_po: "rest.PartnerPO"
+                lines: "rest.Lines"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/shipments
+          name: shipments
+          description: "Submit shipment notifications"
+          operations:
+            - method: GET
+              name: get-shipments
+              description: "Retrieve shipment notifications"
+              call: "toys-r-us-commerce.get-shipments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-shipment
+              description: "Submit a shipment notification"
+              call: "toys-r-us-commerce.create-shipment"
+              with:
+                partner_po: "rest.PartnerPO"
+                ship_date: "rest.ShipDate"
+                carrier: "rest.Carrier"
+                packages: "rest.Packages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/invoices
+          name: invoices
+          description: "Submit invoices for fulfilled orders"
+          operations:
+            - method: GET
+              name: get-invoices
+              description: "Retrieve invoices"
+              call: "toys-r-us-commerce.get-invoices"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-invoice
+              description: "Submit an invoice for fulfilled order"
+              call: "toys-r-us-commerce.create-invoice"
+              with:
+                partner_po: "rest.PartnerPO"
+                invoice_number: "rest.InvoiceNumber"
+                invoice_date: "rest.InvoiceDate"
+                lines: "rest.Lines"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/products
+          name: products
+          description: "Product catalog synchronization"
+          operations:
+            - method: GET
+              name: get-products
+              description: "Retrieve product catalog items"
+              call: "toys-r-us-commerce.get-products"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-product
+              description: "Create or update a product catalog item"
+              call: "toys-r-us-commerce.create-product"
+              with:
+                supplier_sku: "rest.SupplierSKU"
+                description: "rest.Description"
+                unit_price: "rest.UnitPrice"
+                in_stock: "rest.InStock"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: dropship-fulfillment-mcp
+      transport: http
+      description: "MCP server for AI-assisted Toys R Us dropship fulfillment operations."
+      tools:
+        - name: get-orders
+          description: "Retrieve Toys R Us purchase orders pending fulfillment"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "toys-r-us-commerce.get-orders"
+          with:
+            status: "tools.status"
+            page: "tools.page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-order
+          description: "Retrieve a specific Toys R Us purchase order by key"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "toys-r-us-commerce.get-order"
+          with:
+            key: "tools.key"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-acknowledgement
+          description: "Submit an order acknowledgement for a Toys R Us purchase order"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "toys-r-us-commerce.create-acknowledgement"
+          with:
+            partner_po: "tools.partner_po"
+            lines: "tools.lines"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-shipments
+          description: "Retrieve Toys R Us shipment notifications"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "toys-r-us-commerce.get-shipments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-shipment
+          description: "Submit a shipment notification for a fulfilled Toys R Us order"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "toys-r-us-commerce.create-shipment"
+          with:
+            partner_po: "tools.partner_po"
+            ship_date: "tools.ship_date"
+            carrier: "tools.carrier"
+            packages: "tools.packages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-invoices
+          description: "Retrieve Toys R Us invoices"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "toys-r-us-commerce.get-invoices"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-invoice
+          description: "Submit an invoice for fulfilled Toys R Us order items"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "toys-r-us-commerce.create-invoice"
+          with:
+            partner_po: "tools.partner_po"
+            invoice_number: "tools.invoice_number"
+            invoice_date: "tools.invoice_date"
+            lines: "tools.lines"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-products
+          description: "Retrieve Toys R Us product catalog items"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "toys-r-us-commerce.get-products"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: sync-product
+          description: "Create or update a product in the Toys R Us catalog"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "toys-r-us-commerce.create-product"
+          with:
+            supplier_sku: "tools.supplier_sku"
+            description: "tools.description"
+            unit_price: "tools.unit_price"
+            in_stock: "tools.in_stock"
+          outputParameters:
+            - type: object
+              mapping: "$."

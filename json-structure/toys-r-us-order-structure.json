@@ -1,0 +1,37 @@
+{
+  "name": "Toys R Us Order",
+  "description": "Structure of a Toys R Us purchase order document as exchanged via the LogicBroker Commerce API",
+  "fields": [
+    { "name": "Key", "type": "integer", "description": "Unique LogicBroker document key" },
+    { "name": "PartnerPO", "type": "string", "description": "Toys R Us purchase order number" },
+    { "name": "OrderDate", "type": "date", "description": "Date the order was placed" },
+    { "name": "Status", "type": "integer", "description": "Current status code" },
+    {
+      "name": "ShipToAddress", "type": "object", "description": "Ship-to address",
+      "fields": [
+        { "name": "Name", "type": "string" },
+        { "name": "Address1", "type": "string" },
+        { "name": "Address2", "type": "string", "nullable": true },
+        { "name": "City", "type": "string" },
+        { "name": "State", "type": "string" },
+        { "name": "Zip", "type": "string" },
+        { "name": "Country", "type": "string", "default": "US" }
+      ]
+    },
+    {
+      "name": "LineItems", "type": "array", "description": "Order line items",
+      "items": {
+        "fields": [
+          { "name": "LineNumber", "type": "integer" },
+          { "name": "SupplierSKU", "type": "string" },
+          { "name": "BuyerSKU", "type": "string" },
+          { "name": "UPC", "type": "string" },
+          { "name": "Description", "type": "string" },
+          { "name": "Quantity", "type": "number" },
+          { "name": "UnitPrice", "type": "number" },
+          { "name": "UOM", "type": "string" }
+        ]
+      }
+    }
+  ]
+}

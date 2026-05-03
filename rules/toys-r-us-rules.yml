@@ -1,0 +1,87 @@
+extends: spectral:oas
+rules:
+  toys-r-us-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  toys-r-us-operation-ids-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: defined
+
+  toys-r-us-operation-description-required:
+    description: All operations must have a description.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: defined
+
+  toys-r-us-api-key-security:
+    description: The API must use subscription-key authentication.
+    severity: warn
+    given: "$.components.securitySchemes.apiKeyAuth"
+    then:
+      function: defined
+
+  toys-r-us-tags-required:
+    description: All operations must be tagged for categorization.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: defined
+
+  toys-r-us-pagination-params:
+    description: GET collection endpoints should support page and pageSize parameters.
+    severity: hint
+    given: "$.paths[?(!@property.match(/{.*}/))][get].parameters"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+
+  toys-r-us-response-200-defined:
+    description: All operations must define a 200 or 201 success response.
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+
+  toys-r-us-response-401-defined:
+    description: All operations should define a 401 unauthorized response.
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  toys-r-us-import-endpoints-use-post:
+    description: Document import endpoints (*/import) must use POST method.
+    severity: error
+    given: "$.paths[?(@property.match('/import$'))][*]"
+    then:
+      field: post
+      function: defined
+
+  toys-r-us-error-schema-consistent:
+    description: Error response schemas should reference the shared Error schema.
+    severity: warn
+    given: "$.paths[*][*].responses[401,400,404].content.application/json.schema"
+    then:
+      function: defined
