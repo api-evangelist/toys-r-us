@@ -50,7 +50,7 @@ apis:
         url: json-schema/toys-r-us-order-schema.json
       - type: JSONStructure
         url: json-structure/toys-r-us-order-structure.json
-      - type: JSONLd
+      - type: JSONLD
         url: json-ld/toys-r-us-context.jsonld
       - type: SpectralRules
         url: rules/toys-r-us-rules.yml
