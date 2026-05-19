@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toys R Us Commerce API — Products
+  description: 'Toys R Us Commerce API — Products. 2 operations. Lead operation: Get Products. Self-contained Naftiko capability
+    covering one Toys R Us business surface.'
+  tags:
+  - Toys R Us
+  - Products
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOYS_R_US_API_KEY: TOYS_R_US_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: commerce-products
+    baseUri: https://commerceapi.io
+    description: Toys R Us Commerce API — Products business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v2-products
+      path: /api/v2/products
+      operations:
+      - name: getproducts
+        method: GET
+        description: Get Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number for paginated results.
+    - name: api-v2-products-import
+      path: /api/v2/products/import
+      operations:
+      - name: createproduct
+        method: POST
+        description: Create or Update Product
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: subscription-key
+      value: '{{env.TOYS_R_US_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: commerce-products-rest
+    port: 8080
+    description: REST adapter for Toys R Us Commerce API — Products. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v2/products
+      name: api-v2-products
+      description: REST surface for api-v2-products.
+      operations:
+      - method: GET
+        name: getproducts
+        description: Get Products
+        call: commerce-products.getproducts
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v2/products/import
+      name: api-v2-products-import
+      description: REST surface for api-v2-products-import.
+      operations:
+      - method: POST
+        name: createproduct
+        description: Create or Update Product
+        call: commerce-products.createproduct
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: commerce-products-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toys R Us Commerce API — Products. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-products
+      description: Get Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: commerce-products.getproducts
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-update-product
+      description: Create or Update Product
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: commerce-products.createproduct
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
