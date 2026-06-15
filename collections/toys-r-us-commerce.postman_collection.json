@@ -1,0 +1,1943 @@
+{
+  "item": [
+    {
+      "id": "f0e2a3ff-6871-4716-b31c-56026e8bcf77",
+      "name": "Orders",
+      "description": {
+        "content": "Retrieve and manage purchase orders in the EDI 850 format. Orders initiate the order lifecycle and update until all items are fulfilled and invoiced.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f98e963b-a1f3-410c-8504-ee7c8ca5673a",
+          "name": "Get Orders",
+          "request": {
+            "name": "Get Orders",
+            "description": {
+              "content": "Retrieves a list of purchase orders available for the authenticated vendor. Returns orders in their current state including new, in progress, and completed orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "Filter orders by status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d97b3d91-0097-463e-8d1f-5ede2600fd6e",
+              "name": "Successfully retrieved orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 6510,\n  \"PageSize\": 8358,\n  \"PageNumber\": 6505,\n  \"Body\": [\n    {\n      \"Key\": 5072,\n      \"PartnerPO\": \"string\",\n      \"OrderDate\": \"2018-07-24\",\n      \"Status\": 4486,\n      \"ShipToAddress\": {\n        \"Name\": \"string\",\n        \"Address1\": \"string\",\n        \"Address2\": \"string\",\n        \"City\": \"string\",\n        \"State\": \"string\",\n        \"Zip\": \"string\",\n        \"Country\": \"string\"\n      },\n      \"LineItems\": [\n        {\n          \"LineNumber\": 6051,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 4871.963973145026,\n          \"UnitPrice\": 3866.212725450774,\n          \"UOM\": \"string\"\n        },\n        {\n          \"LineNumber\": 8552,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 9486.523889077935,\n          \"UnitPrice\": 9829.91844347083,\n          \"UOM\": \"string\"\n        }\n      ]\n    },\n    {\n      \"Key\": 8865,\n      \"PartnerPO\": \"string\",\n      \"OrderDate\": \"2026-01-25\",\n      \"Status\": 5615,\n      \"ShipToAddress\": {\n        \"Name\": \"string\",\n        \"Address1\": \"string\",\n        \"Address2\": \"string\",\n        \"City\": \"string\",\n        \"State\": \"string\",\n        \"Zip\": \"string\",\n        \"Country\": \"string\"\n      },\n      \"LineItems\": [\n        {\n          \"LineNumber\": 1802,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 412.47798281107475,\n          \"UnitPrice\": 6763.56732619739,\n          \"UOM\": \"string\"\n        },\n        {\n          \"LineNumber\": 1305,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 3131.4765786114663,\n          \"UnitPrice\": 1720.426942073503,\n          \"UOM\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43b26cf3-ef08-4c6a-bdf4-06d3b4b879b9",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6564b7c-fca9-47c5-85da-42534eb44b25",
+          "name": "Get Order",
+          "request": {
+            "name": "Get Order",
+            "description": {
+              "content": "Retrieves a single purchase order by its unique key identifier. Returns the full order document including line items, ship-to information, and order status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "key",
+                  "description": "(Required) The unique LogicBroker document key identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e9dee12-620e-4a79-b7ed-f630452766a7",
+              "name": "Successfully retrieved order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Key\": 5077,\n  \"PartnerPO\": \"string\",\n  \"OrderDate\": \"1994-11-11\",\n  \"Status\": 518,\n  \"ShipToAddress\": {\n    \"Name\": \"string\",\n    \"Address1\": \"string\",\n    \"Address2\": \"string\",\n    \"City\": \"string\",\n    \"State\": \"string\",\n    \"Zip\": \"string\",\n    \"Country\": \"string\"\n  },\n  \"LineItems\": [\n    {\n      \"LineNumber\": 2523,\n      \"SupplierSKU\": \"string\",\n      \"BuyerSKU\": \"string\",\n      \"UPC\": \"string\",\n      \"Description\": \"string\",\n      \"Quantity\": 3593.286126315164,\n      \"UnitPrice\": 3220.2332920636477,\n      \"UOM\": \"string\"\n    },\n    {\n      \"LineNumber\": 1422,\n      \"SupplierSKU\": \"string\",\n      \"BuyerSKU\": \"string\",\n      \"UPC\": \"string\",\n      \"Description\": \"string\",\n      \"Quantity\": 1369.4565179173246,\n      \"UnitPrice\": 2392.499261831634,\n      \"UOM\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8244bc2c-4ef4-4174-87f2-5a0ecd44d3f3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eec7fc60-fe46-48f3-85a8-236ecc2cae14",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f5abe049-e1bb-41a5-b516-3fceaa10e3a2",
+      "name": "Acknowledgements",
+      "description": {
+        "content": "Create and retrieve order acknowledgements (EDI 855) to accept, cancel, or backorder order items. Sent after order receipt and before shipment or invoice creation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79f82455-1d57-41e7-9f97-75c8ca354bf4",
+          "name": "Get Acknowledgements",
+          "request": {
+            "name": "Get Acknowledgements",
+            "description": {
+              "content": "Retrieves a list of order acknowledgements submitted by or available to the authenticated vendor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "acknowledgements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "Filter acknowledgements by status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "102c6f37-72a9-4503-aac0-133b8a178834",
+              "name": "Successfully retrieved acknowledgements",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "acknowledgements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 8020\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fcecd02-6723-4768-aace-37a68013b2e8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "acknowledgements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4aaaf17e-7aaf-44e9-b56b-b37fc10f4e10",
+          "name": "Create Acknowledgement",
+          "request": {
+            "name": "Create Acknowledgement",
+            "description": {
+              "content": "Submits a new order acknowledgement (EDI 855) to accept, cancel, or backorder order line items. Must be sent after receiving an order and before creating a shipment or invoice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "acknowledgements",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c970af3-eadb-4c50-8311-f645140bfd6b",
+              "name": "Acknowledgement successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "acknowledgements",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Body\": {},\n  \"Errors\": [\n    {\n      \"Message\": \"string\"\n    },\n    {\n      \"Message\": \"string\"\n    }\n  ],\n  \"StatusCode\": 4150\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f159a44a-dfe2-411f-a314-ee963920769b",
+              "name": "Invalid acknowledgement data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "acknowledgements",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a970376e-6f52-4a98-b689-9896cab42713",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "acknowledgements",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"AckCode\": \"<string>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "12cfd069-61e6-4f66-a9d6-8e5c7a5d862b",
+      "name": "Shipments",
+      "description": {
+        "content": "Create and retrieve shipment notifications (EDI 856) containing containerized data, tracking numbers, and fulfillment details for shipped order items.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1d09ab7-3d30-4ff8-b28d-c5494d75947c",
+          "name": "Get Shipments",
+          "request": {
+            "name": "Get Shipments",
+            "description": {
+              "content": "Retrieves a list of shipment notifications (EDI 856) submitted by or available to the authenticated vendor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "Filter shipments by status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab752daf-3c2d-4548-9350-c56d67ec99d5",
+              "name": "Successfully retrieved shipments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 8658\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea371614-d157-479e-a391-fb932d4b1b9e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04522b45-f07b-43bb-b956-3409f82fd326",
+          "name": "Create Shipment",
+          "request": {
+            "name": "Create Shipment",
+            "description": {
+              "content": "Submits a new shipment notification (EDI 856) to notify the retailer of shipped order items. Includes containerized data such as tracking numbers, carrier information, package dimensions, and item-level ship quantities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "shipments",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Packages\": [\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"ShipDate\": \"<date>\",\n  \"Carrier\": \"<string>\",\n  \"ServiceLevel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b243ff4b-cae0-47e8-9a2f-fd46494ae41e",
+              "name": "Shipment successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "shipments",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Packages\": [\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"ShipDate\": \"<date>\",\n  \"Carrier\": \"<string>\",\n  \"ServiceLevel\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Body\": {},\n  \"Errors\": [\n    {\n      \"Message\": \"string\"\n    },\n    {\n      \"Message\": \"string\"\n    }\n  ],\n  \"StatusCode\": 4150\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afbb3d71-cf9c-4250-a80b-fed0ad36ee0a",
+              "name": "Invalid shipment data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "shipments",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Packages\": [\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"ShipDate\": \"<date>\",\n  \"Carrier\": \"<string>\",\n  \"ServiceLevel\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfe3c6eb-48f5-42cc-a1f6-85799cb4d69e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "shipments",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"Packages\": [\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"TrackingNumber\": \"<string>\",\n      \"Weight\": \"<double>\",\n      \"Length\": \"<double>\",\n      \"Width\": \"<double>\",\n      \"Height\": \"<double>\",\n      \"Lines\": [\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        },\n        {\n          \"LineNumber\": \"<integer>\",\n          \"Quantity\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"ShipDate\": \"<date>\",\n  \"Carrier\": \"<string>\",\n  \"ServiceLevel\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b71cd4b-6c48-45b5-9931-93c5ffa31efc",
+      "name": "Invoices",
+      "description": {
+        "content": "Create and retrieve invoices (EDI 810) providing billing details and item pricing for fulfilled goods.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "886aa2ee-2573-41e2-abf4-f373b826f04d",
+          "name": "Get Invoices",
+          "request": {
+            "name": "Get Invoices",
+            "description": {
+              "content": "Retrieves a list of invoices (EDI 810) submitted by or available to the authenticated vendor.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "Filter invoices by status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7987e9f7-3529-4a5f-b825-1ffacc038106",
+              "name": "Successfully retrieved invoices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 6270\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2c35cb3-2108-49f1-8095-4f51573df3c2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcd99aa0-cee9-4625-84b8-21df2e5c093c",
+          "name": "Create Invoice",
+          "request": {
+            "name": "Create Invoice",
+            "description": {
+              "content": "Submits a new invoice (EDI 810) providing billing details and item pricing for fulfilled goods. The invoice must reference the original order and include all line item pricing and payment information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "invoices",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"InvoiceNumber\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    }\n  ],\n  \"InvoiceDate\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e07811da-a871-402e-8e5e-9b2b890cd138",
+              "name": "Invoice successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "invoices",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"InvoiceNumber\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    }\n  ],\n  \"InvoiceDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Body\": {},\n  \"Errors\": [\n    {\n      \"Message\": \"string\"\n    },\n    {\n      \"Message\": \"string\"\n    }\n  ],\n  \"StatusCode\": 4150\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06a9743a-0779-41e5-9abe-a2ac73e1d269",
+              "name": "Invalid invoice data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "invoices",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"InvoiceNumber\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    }\n  ],\n  \"InvoiceDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1961a97-11f3-4b80-b54c-787c15d43896",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "invoices",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"PartnerPO\": \"<string>\",\n  \"InvoiceNumber\": \"<string>\",\n  \"Lines\": [\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    },\n    {\n      \"LineNumber\": \"<integer>\",\n      \"Quantity\": \"<number>\",\n      \"UnitPrice\": \"<double>\",\n      \"UOM\": \"<string>\"\n    }\n  ],\n  \"InvoiceDate\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "441bee7c-32ca-4200-9a09-8bf80396c480",
+      "name": "Products",
+      "description": {
+        "content": "Manage product catalog items including item creation, updates, and availability synchronization.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41bab666-c756-4d99-a05b-7366d50bae17",
+          "name": "Get Products",
+          "request": {
+            "name": "Get Products",
+            "description": {
+              "content": "Retrieves a list of product catalog items associated with the authenticated vendor account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f8357d0-f33c-4922-8a0f-47640fb87af7",
+              "name": "Successfully retrieved products",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 6069\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "166378fe-bcf9-44ef-89c9-d9b43e60b632",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6952df1-994e-41ca-8f23-44a0d9bf38df",
+          "name": "Create or Update Product",
+          "request": {
+            "name": "Create or Update Product",
+            "description": {
+              "content": "Creates or updates a product catalog item. Used to synchronize product information including identifiers, descriptions, pricing, and availability between the vendor system and the Toys R Us catalog.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "products",
+                "import"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SupplierSKU\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"UPC\": \"<string>\",\n  \"UnitPrice\": \"<double>\",\n  \"MSRP\": \"<double>\",\n  \"InStock\": \"<boolean>\",\n  \"Quantity\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8957b165-6f6b-4d74-8b45-b338f6cd96cb",
+              "name": "Product successfully imported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "products",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SupplierSKU\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"UPC\": \"<string>\",\n  \"UnitPrice\": \"<double>\",\n  \"MSRP\": \"<double>\",\n  \"InStock\": \"<boolean>\",\n  \"Quantity\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Body\": {},\n  \"Errors\": [\n    {\n      \"Message\": \"string\"\n    },\n    {\n      \"Message\": \"string\"\n    }\n  ],\n  \"StatusCode\": 4150\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65d79c7f-ff99-4616-9838-2f239a8eff77",
+              "name": "Invalid product data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "products",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SupplierSKU\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"UPC\": \"<string>\",\n  \"UnitPrice\": \"<double>\",\n  \"MSRP\": \"<double>\",\n  \"InStock\": \"<boolean>\",\n  \"Quantity\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88689015-afb3-45a7-b471-944366b8d86a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "products",
+                    "import"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"SupplierSKU\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"UPC\": \"<string>\",\n  \"UnitPrice\": \"<double>\",\n  \"MSRP\": \"<double>\",\n  \"InStock\": \"<boolean>\",\n  \"Quantity\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 8994,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://commerceapi.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "subscription-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "35f4dc9f-03b0-466b-aef4-c49e0861b3c2",
+    "name": "Toys R Us Commerce API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).\n\nContact Support:\n Name: Toys R Us Supplier Support",
+      "type": "text/plain"
+    }
+  }
+}

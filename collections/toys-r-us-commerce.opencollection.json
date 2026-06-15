@@ -1,0 +1,262 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toys R Us Commerce API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "subscription-key",
+      "value": "{{subscription-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter orders by status code."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of purchase orders available for the authenticated vendor. Returns orders in their current state including new, in progress, and completed orders."
+        },
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/orders/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path",
+                "description": "The unique LogicBroker document key identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a single purchase order by its unique key identifier. Returns the full order document including line items, ship-to information, and order status."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Acknowledgements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Acknowledgements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/acknowledgements",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter acknowledgements by status code."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of order acknowledgements submitted by or available to the authenticated vendor."
+        },
+        {
+          "info": {
+            "name": "Create Acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/acknowledgements/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new order acknowledgement (EDI 855) to accept, cancel, or backorder order line items. Must be sent after receiving an order and before creating a shipment or invoice."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/shipments",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter shipments by status code."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of shipment notifications (EDI 856) submitted by or available to the authenticated vendor."
+        },
+        {
+          "info": {
+            "name": "Create Shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/shipments/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new shipment notification (EDI 856) to notify the retailer of shipped order items. Includes containerized data such as tracking numbers, carrier information, package dimensions, and item-level ship quantities."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/invoices",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter invoices by status code."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of invoices (EDI 810) submitted by or available to the authenticated vendor."
+        },
+        {
+          "info": {
+            "name": "Create Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/invoices/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new invoice (EDI 810) providing billing details and item pricing for fulfilled goods. The invoice must reference the original order and include all line item pricing and payment information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/products",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of product catalog items associated with the authenticated vendor account."
+        },
+        {
+          "info": {
+            "name": "Create or Update Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/products/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a product catalog item. Used to synchronize product information including identifiers, descriptions, pricing, and availability between the vendor system and the Toys R Us catalog."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
