@@ -57,6 +57,10 @@ apis:
       - type: SwaggerStage
         url: https://stage.commerceapi.io/swagger/ui/index
 common:
+  - type: DomainSecurity
+    url: security/toys-r-us-domain-security.yml
+  - type: Authentication
+    url: authentication/toys-r-us-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/toysrus1
   - type: Website
@@ -67,6 +71,8 @@ common:
     url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
   - type: DeveloperPortal
     url: https://dev.logicbroker.com
+  - url: https://www.toysrus.com/blogs/diy-activities.atom
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

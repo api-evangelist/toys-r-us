@@ -1,0 +1,35 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.toysrus.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  2 16:24:33 2026 GMT
+  hsts: true
+  hsts_max_age: 7889238
+- host: toysrus.logicbroker.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 28 05:58:46 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: commerceapi.io
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Jul 30 20:41:45 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: toysrus.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: logicbroker.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

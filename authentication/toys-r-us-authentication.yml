@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/toys-r-us-commerce-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: subscription-key
+  description: API subscription key obtained from the Toys R Us LogicBroker supplier portal.
+    Set up your key at https://stageportal.logicbroker.com/profile/api-authentication/
+  sources:
+  - openapi/toys-r-us-commerce-openapi.yml
