@@ -57,6 +57,8 @@ apis:
       - type: SwaggerStage
         url: https://stage.commerceapi.io/swagger/ui/index
 common:
+  - type: AgenticAccess
+    url: agentic-access/toys-r-us-agentic-access.yml
   - type: DomainSecurity
     url: security/toys-r-us-domain-security.yml
   - type: Authentication
