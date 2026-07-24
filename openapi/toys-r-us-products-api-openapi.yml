@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Toys R Us Commerce Acknowledgements Products API
+  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).
+  version: '1.0'
+  contact:
+    name: Toys R Us Supplier Support
+    url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
+servers:
+- url: https://commerceapi.io
+  description: Production Server
+- url: https://stage.commerceapi.io
+  description: Stage / Testing Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Products
+  description: Manage product catalog items including item creation, updates, and availability synchronization.
+paths:
+  /api/v2/products:
+    get:
+      operationId: getProducts
+      summary: Get Products
+      description: Retrieves a list of product catalog items associated with the authenticated vendor account.
+      tags:
+      - Products
+      parameters:
+      - name: page
+        in: query
+        description: Page number for paginated results.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successfully retrieved products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v2/products/import:
+    post:
+      operationId: createProduct
+      summary: Create or Update Product
+      description: Creates or updates a product catalog item. Used to synchronize product information including identifiers, descriptions, pricing, and availability between the vendor system and the Toys R Us catalog.
+      tags:
+      - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: Product successfully imported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: Invalid product data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ImportResponse:
+      type: object
+      description: Response returned after a successful document import operation.
+      properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+        StatusCode:
+          type: integer
+          description: HTTP status code of the import result.
+    ProductRequest:
+      type: object
+      description: Request body for creating or updating a product catalog item.
+      required:
+      - SupplierSKU
+      - Description
+      properties:
+        SupplierSKU:
+          type: string
+          description: The vendor's unique product identifier.
+        UPC:
+          type: string
+          description: Universal Product Code.
+        Description:
+          type: string
+          description: Product title or description.
+        UnitPrice:
+          type: number
+          format: double
+          description: Wholesale unit price.
+        MSRP:
+          type: number
+          format: double
+          description: Manufacturer's suggested retail price.
+        InStock:
+          type: boolean
+          description: Whether the product is currently in stock.
+        Quantity:
+          type: integer
+          description: Available inventory quantity.
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    ProductsResponse:
+      type: object
+      description: Paginated list of product catalog items.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: subscription-key
+      description: API subscription key obtained from the Toys R Us LogicBroker supplier portal. Set up your key at https://stageportal.logicbroker.com/profile/api-authentication/
+externalDocs:
+  description: Toys R Us LogicBroker API Documentation
+  url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation

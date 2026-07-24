@@ -1,0 +1,170 @@
+openapi: 3.1.0
+info:
+  title: Toys R Us Commerce Acknowledgements Invoices API
+  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).
+  version: '1.0'
+  contact:
+    name: Toys R Us Supplier Support
+    url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
+servers:
+- url: https://commerceapi.io
+  description: Production Server
+- url: https://stage.commerceapi.io
+  description: Stage / Testing Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Invoices
+  description: Create and retrieve invoices (EDI 810) providing billing details and item pricing for fulfilled goods.
+paths:
+  /api/v2/invoices:
+    get:
+      operationId: getInvoices
+      summary: Get Invoices
+      description: Retrieves a list of invoices (EDI 810) submitted by or available to the authenticated vendor.
+      tags:
+      - Invoices
+      parameters:
+      - name: status
+        in: query
+        description: Filter invoices by status code.
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number for paginated results.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successfully retrieved invoices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v2/invoices/import:
+    post:
+      operationId: createInvoice
+      summary: Create Invoice
+      description: Submits a new invoice (EDI 810) providing billing details and item pricing for fulfilled goods. The invoice must reference the original order and include all line item pricing and payment information.
+      tags:
+      - Invoices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceRequest'
+      responses:
+        '200':
+          description: Invoice successfully imported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: Invalid invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ImportResponse:
+      type: object
+      description: Response returned after a successful document import operation.
+      properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+        StatusCode:
+          type: integer
+          description: HTTP status code of the import result.
+    InvoiceRequest:
+      type: object
+      description: Request body for creating an invoice (EDI 810).
+      required:
+      - PartnerPO
+      - InvoiceNumber
+      - Lines
+      properties:
+        PartnerPO:
+          type: string
+          description: The retailer's purchase order number.
+        InvoiceNumber:
+          type: string
+          description: The vendor's invoice number.
+        InvoiceDate:
+          type: string
+          format: date
+          description: Date of the invoice.
+        Lines:
+          type: array
+          description: Invoiced line items with pricing details.
+          items:
+            type: object
+            properties:
+              LineNumber:
+                type: integer
+              Quantity:
+                type: number
+              UnitPrice:
+                type: number
+                format: double
+              UOM:
+                type: string
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    InvoicesResponse:
+      type: object
+      description: Paginated list of invoices.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: subscription-key
+      description: API subscription key obtained from the Toys R Us LogicBroker supplier portal. Set up your key at https://stageportal.logicbroker.com/profile/api-authentication/
+externalDocs:
+  description: Toys R Us LogicBroker API Documentation
+  url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation

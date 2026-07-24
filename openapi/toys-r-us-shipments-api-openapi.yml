@@ -1,0 +1,188 @@
+openapi: 3.1.0
+info:
+  title: Toys R Us Commerce Acknowledgements Shipments API
+  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).
+  version: '1.0'
+  contact:
+    name: Toys R Us Supplier Support
+    url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
+servers:
+- url: https://commerceapi.io
+  description: Production Server
+- url: https://stage.commerceapi.io
+  description: Stage / Testing Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Shipments
+  description: Create and retrieve shipment notifications (EDI 856) containing containerized data, tracking numbers, and fulfillment details for shipped order items.
+paths:
+  /api/v2/shipments:
+    get:
+      operationId: getShipments
+      summary: Get Shipments
+      description: Retrieves a list of shipment notifications (EDI 856) submitted by or available to the authenticated vendor.
+      tags:
+      - Shipments
+      parameters:
+      - name: status
+        in: query
+        description: Filter shipments by status code.
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number for paginated results.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successfully retrieved shipments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v2/shipments/import:
+    post:
+      operationId: createShipment
+      summary: Create Shipment
+      description: Submits a new shipment notification (EDI 856) to notify the retailer of shipped order items. Includes containerized data such as tracking numbers, carrier information, package dimensions, and item-level ship quantities.
+      tags:
+      - Shipments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentRequest'
+      responses:
+        '200':
+          description: Shipment successfully imported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: Invalid shipment data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ImportResponse:
+      type: object
+      description: Response returned after a successful document import operation.
+      properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+        StatusCode:
+          type: integer
+          description: HTTP status code of the import result.
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    ShipmentsResponse:
+      type: object
+      description: Paginated list of shipment notifications.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
+    ShipmentRequest:
+      type: object
+      description: Request body for creating a shipment notification (EDI 856).
+      required:
+      - PartnerPO
+      - Packages
+      properties:
+        PartnerPO:
+          type: string
+          description: The retailer's purchase order number for this shipment.
+        ShipDate:
+          type: string
+          format: date
+          description: Date the shipment was dispatched.
+        Carrier:
+          type: string
+          description: Carrier name or SCAC code.
+        ServiceLevel:
+          type: string
+          description: Shipping service level.
+        Packages:
+          type: array
+          description: List of packages in the shipment.
+          items:
+            type: object
+            properties:
+              TrackingNumber:
+                type: string
+                description: Carrier tracking number.
+              Weight:
+                type: number
+                format: double
+              Length:
+                type: number
+                format: double
+              Width:
+                type: number
+                format: double
+              Height:
+                type: number
+                format: double
+              Lines:
+                type: array
+                description: Line items included in this package.
+                items:
+                  type: object
+                  properties:
+                    LineNumber:
+                      type: integer
+                    Quantity:
+                      type: number
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: subscription-key
+      description: API subscription key obtained from the Toys R Us LogicBroker supplier portal. Set up your key at https://stageportal.logicbroker.com/profile/api-authentication/
+externalDocs:
+  description: Toys R Us LogicBroker API Documentation
+  url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation

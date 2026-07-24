@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Toys R Us Commerce Acknowledgements API
+  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).
+  version: '1.0'
+  contact:
+    name: Toys R Us Supplier Support
+    url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
+servers:
+- url: https://commerceapi.io
+  description: Production Server
+- url: https://stage.commerceapi.io
+  description: Stage / Testing Server
+security:
+- apiKeyAuth: []
+tags:
+- name: Acknowledgements
+  description: Create and retrieve order acknowledgements (EDI 855) to accept, cancel, or backorder order items. Sent after order receipt and before shipment or invoice creation.
+paths:
+  /api/v2/acknowledgements:
+    get:
+      operationId: getAcknowledgements
+      summary: Get Acknowledgements
+      description: Retrieves a list of order acknowledgements submitted by or available to the authenticated vendor.
+      tags:
+      - Acknowledgements
+      parameters:
+      - name: status
+        in: query
+        description: Filter acknowledgements by status code.
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number for paginated results.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      responses:
+        '200':
+          description: Successfully retrieved acknowledgements
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcknowledgementsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v2/acknowledgements/import:
+    post:
+      operationId: createAcknowledgement
+      summary: Create Acknowledgement
+      description: Submits a new order acknowledgement (EDI 855) to accept, cancel, or backorder order line items. Must be sent after receiving an order and before creating a shipment or invoice.
+      tags:
+      - Acknowledgements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcknowledgementRequest'
+      responses:
+        '200':
+          description: Acknowledgement successfully imported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportResponse'
+        '400':
+          description: Invalid acknowledgement data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ImportResponse:
+      type: object
+      description: Response returned after a successful document import operation.
+      properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+        StatusCode:
+          type: integer
+          description: HTTP status code of the import result.
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    AcknowledgementsResponse:
+      type: object
+      description: Paginated list of order acknowledgements.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
+    AcknowledgementRequest:
+      type: object
+      description: Request body for creating an order acknowledgement (EDI 855).
+      required:
+      - PartnerPO
+      - Lines
+      properties:
+        PartnerPO:
+          type: string
+          description: The retailer's purchase order number being acknowledged.
+        Lines:
+          type: array
+          description: Line item acknowledgements.
+          items:
+            type: object
+            properties:
+              LineNumber:
+                type: integer
+              AckCode:
+                type: string
+                description: 'Acknowledgement code: IA (Accept), IQ (Quantity Changed), IB (Item Backordered), IC (Item Cancelled).'
+                enum:
+                - IA
+                - IQ
+                - IB
+                - IC
+              Quantity:
+                type: number
+              UnitPrice:
+                type: number
+                format: double
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: subscription-key
+      description: API subscription key obtained from the Toys R Us LogicBroker supplier portal. Set up your key at https://stageportal.logicbroker.com/profile/api-authentication/
+externalDocs:
+  description: Toys R Us LogicBroker API Documentation
+  url: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
