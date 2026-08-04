@@ -1,0 +1,22 @@
+{
+  "provider": "toys-r-us",
+  "sources": [
+    "toys-r-us-acknowledgements-api-openapi.yml",
+    "toys-r-us-invoices-api-openapi.yml",
+    "toys-r-us-orders-api-openapi.yml",
+    "toys-r-us-products-api-openapi.yml",
+    "toys-r-us-shipments-api-openapi.yml"
+  ],
+  "outputs": [
+    "toys-r-us-acknowledgements-api-openapi.yml",
+    "toys-r-us-invoices-api-openapi.yml",
+    "toys-r-us-orders-api-openapi.yml",
+    "toys-r-us-products-api-openapi.yml",
+    "toys-r-us-shipments-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
