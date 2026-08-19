@@ -1,0 +1,429 @@
+{
+  "item": [
+    {
+      "id": "b9e22892-7888-4628-8c13-2cac00742fda",
+      "name": "Orders",
+      "description": {
+        "content": "Retrieve and manage purchase orders in the EDI 850 format. Orders initiate the order lifecycle and update until all items are fulfilled and invoiced.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ec0d808-3261-4221-839f-2b83632e0cbe",
+          "name": "Get Orders",
+          "request": {
+            "name": "Get Orders",
+            "description": {
+              "content": "Retrieves a list of purchase orders available for the authenticated vendor. Returns orders in their current state including new, in progress, and completed orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<integer>",
+                  "description": "Filter orders by status code."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number for paginated results."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "Number of records per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d201c24-673a-4443-b094-79ce12cdf9bf",
+              "name": "Successfully retrieved orders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"TotalResults\": 9975,\n  \"PageSize\": 1400,\n  \"PageNumber\": 1486,\n  \"Body\": [\n    {\n      \"Key\": 511,\n      \"PartnerPO\": \"string\",\n      \"OrderDate\": \"1951-12-27\",\n      \"Status\": 2839,\n      \"ShipToAddress\": {\n        \"Name\": \"string\",\n        \"Address1\": \"string\",\n        \"Address2\": \"string\",\n        \"City\": \"string\",\n        \"State\": \"string\",\n        \"Zip\": \"string\",\n        \"Country\": \"string\"\n      },\n      \"LineItems\": [\n        {\n          \"LineNumber\": 6835,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 1243.7428426232555,\n          \"UnitPrice\": 7233.464952541536,\n          \"UOM\": \"string\"\n        },\n        {\n          \"LineNumber\": 1846,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 6005.6030178936135,\n          \"UnitPrice\": 5070.95639602389,\n          \"UOM\": \"string\"\n        }\n      ]\n    },\n    {\n      \"Key\": 4930,\n      \"PartnerPO\": \"string\",\n      \"OrderDate\": \"2010-07-21\",\n      \"Status\": 9664,\n      \"ShipToAddress\": {\n        \"Name\": \"string\",\n        \"Address1\": \"string\",\n        \"Address2\": \"string\",\n        \"City\": \"string\",\n        \"State\": \"string\",\n        \"Zip\": \"string\",\n        \"Country\": \"string\"\n      },\n      \"LineItems\": [\n        {\n          \"LineNumber\": 3247,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 1689.2729660303496,\n          \"UnitPrice\": 9867.16710012791,\n          \"UOM\": \"string\"\n        },\n        {\n          \"LineNumber\": 7358,\n          \"SupplierSKU\": \"string\",\n          \"BuyerSKU\": \"string\",\n          \"UPC\": \"string\",\n          \"Description\": \"string\",\n          \"Quantity\": 6422.34274438869,\n          \"UnitPrice\": 3491.210919536627,\n          \"UOM\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2a27bb9-9d68-4086-94ca-6d50dd405715",
+              "name": "Unauthorized - invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 6673,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f76cd2ea-e76e-437e-b329-afc13f8d477f",
+          "name": "Get Order",
+          "request": {
+            "name": "Get Order",
+            "description": {
+              "content": "Retrieves a single purchase order by its unique key identifier. Returns the full order document including line items, ship-to information, and order status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "orders",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "key",
+                  "description": "(Required) The unique LogicBroker document key identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9b0a336-a206-4bff-aa5f-fe59ae683246",
+              "name": "Successfully retrieved order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Key\": 9216,\n  \"PartnerPO\": \"string\",\n  \"OrderDate\": \"1999-10-18\",\n  \"Status\": 1184,\n  \"ShipToAddress\": {\n    \"Name\": \"string\",\n    \"Address1\": \"string\",\n    \"Address2\": \"string\",\n    \"City\": \"string\",\n    \"State\": \"string\",\n    \"Zip\": \"string\",\n    \"Country\": \"string\"\n  },\n  \"LineItems\": [\n    {\n      \"LineNumber\": 4078,\n      \"SupplierSKU\": \"string\",\n      \"BuyerSKU\": \"string\",\n      \"UPC\": \"string\",\n      \"Description\": \"string\",\n      \"Quantity\": 7085.244278192686,\n      \"UnitPrice\": 1966.623555880561,\n      \"UOM\": \"string\"\n    },\n    {\n      \"LineNumber\": 4791,\n      \"SupplierSKU\": \"string\",\n      \"BuyerSKU\": \"string\",\n      \"UPC\": \"string\",\n      \"Description\": \"string\",\n      \"Quantity\": 6257.883108857063,\n      \"UnitPrice\": 183.58310144412138,\n      \"UOM\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e06bab5-1f41-4002-bc1b-9f1942e750a7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 6673,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c427172-f50c-42e2-8e16-5e602e33e5b5",
+              "name": "Order not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "orders",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "key",
+                      "description": "(Required) The unique LogicBroker document key identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "subscription-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"StatusCode\": 6673,\n  \"Message\": \"string\",\n  \"Id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://commerceapi.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "subscription-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "48292780-1f52-4813-ba39-bde824662488",
+    "name": "Toys R Us Commerce Acknowledgements Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).\n\nContact Support:\n Name: Toys R Us Supplier Support",
+      "type": "text/plain"
+    }
+  }
+}

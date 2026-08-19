@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toys R Us Commerce Acknowledgements API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "subscription-key",
+      "value": "{{subscription-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Acknowledgements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Acknowledgements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/acknowledgements",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter acknowledgements by status code."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of order acknowledgements submitted by or available to the authenticated vendor."
+        },
+        {
+          "info": {
+            "name": "Create Acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/acknowledgements/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new order acknowledgement (EDI 855) to accept, cancel, or backorder order line items. Must be sent after receiving an order and before creating a shipment or invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

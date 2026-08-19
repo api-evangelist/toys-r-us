@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toys R Us Commerce Acknowledgements Products API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "subscription-key",
+      "value": "{{subscription-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://commerceapi.io/api/v2/products",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated results."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of product catalog items associated with the authenticated vendor account."
+        },
+        {
+          "info": {
+            "name": "Create or Update Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://commerceapi.io/api/v2/products/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a product catalog item. Used to synchronize product information including identifiers, descriptions, pricing, and availability between the vendor system and the Toys R Us catalog."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
