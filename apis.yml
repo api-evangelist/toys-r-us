@@ -95,6 +95,8 @@ apis:
   humanURL: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
   baseURL: https://commerceapi.io
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -122,6 +124,8 @@ apis:
   humanURL: https://toysrus.logicbroker.com/hc/en-us/articles/9357008230164-API-Documentation
   baseURL: https://commerceapi.io
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
