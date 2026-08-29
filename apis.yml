@@ -186,6 +186,9 @@ apis:
   - type: SwaggerStage
     url: https://stage.commerceapi.io/swagger/ui/index
 common:
+  - type: CapabilityMap
+    url: capabilities/toys-r-us-capability-edges.yml
+    name: Toys R Us Business Capability Map
   - type: AgenticAccess
     url: agentic-access/toys-r-us-agentic-access.yml
   - type: DomainSecurity

@@ -1,0 +1,25 @@
+slug: toys-r-us
+provider: Toys R Us
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Products
+  spec_file: toys-r-us-products-api-openapi.yml
+  capability_id: BC-2370
+  capability_id_l1: BC-2370
+  capability_name: Product Information Management
+  confidence: 0.7
+  evidence: '''product catalog synchronization''; POST /api/v2/products/import ''Create or Update Product'''
+  reason: Trading-partner exchange of product catalogue records with the retailer is product information
+    management; evidence does not clearly distinguish item master maintenance from channel syndication,
+    so no L2 asserted.
