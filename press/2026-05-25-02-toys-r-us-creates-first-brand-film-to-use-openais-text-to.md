@@ -1,7 +1,9 @@
 ---
 title: Toys R Us creates first brand film to use OpenAI's text-to- ...
 url: https://www.marketingdive.com/news/toys-r-us-openai-sora-gen-ai-first-text-video/719797/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Toys "R" Us" press release artificial intelligence'
 position: 2
 source: serpapi-google

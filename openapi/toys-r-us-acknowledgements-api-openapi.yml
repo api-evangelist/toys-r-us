@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Toys R Us Commerce Acknowledgements API
-  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle. The API supports order management, shipment notifications, invoice processing, acknowledgement workflows, and product catalog synchronization. Vendors authenticate using an API subscription key and interact with endpoints to exchange transactional documents compatible with EDI standards including EDI 850 (orders), EDI 855 (acknowledgements), EDI 856 (shipments), and EDI 810 (invoices).
+  description: The Toys R Us Commerce API, powered by LogicBroker, enables supplier and dropship vendor integrations for the complete order lifecycle.
   version: '1.0'
   contact:
     name: Toys R Us Supplier Support
@@ -85,6 +85,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.
@@ -103,19 +116,6 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
     AcknowledgementsResponse:
       type: object
       description: Paginated list of order acknowledgements.

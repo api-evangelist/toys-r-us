@@ -1,11 +1,7 @@
 {
   "provider": "toys-r-us",
   "sources": [
-    "toys-r-us-acknowledgements-api-openapi.yml",
-    "toys-r-us-invoices-api-openapi.yml",
-    "toys-r-us-orders-api-openapi.yml",
-    "toys-r-us-products-api-openapi.yml",
-    "toys-r-us-shipments-api-openapi.yml"
+    "_original/toys-r-us-commerce-openapi.yml"
   ],
   "outputs": [
     "toys-r-us-acknowledgements-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "toys-r-us-commerce-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "toys-r-us-acknowledgements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toys-r-us-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toys-r-us-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toys-r-us-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toys-r-us-shipments-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
