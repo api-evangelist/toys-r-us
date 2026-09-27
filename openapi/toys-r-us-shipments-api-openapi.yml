@@ -85,29 +85,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
-    ShipmentsResponse:
-      type: object
-      description: Paginated list of shipment notifications.
-      properties:
-        TotalResults:
-          type: integer
-        Body:
-          type: array
-          items:
-            type: object
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.
@@ -177,6 +154,29 @@ components:
                       type: integer
                     Quantity:
                       type: number
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    ShipmentsResponse:
+      type: object
+      description: Paginated list of shipment notifications.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
   securitySchemes:
     apiKeyAuth:
       type: apiKey

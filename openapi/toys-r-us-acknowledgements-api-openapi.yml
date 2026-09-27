@@ -85,6 +85,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    AcknowledgementsResponse:
+      type: object
+      description: Paginated list of order acknowledgements.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
     Error:
       type: object
       description: Standard error response from the LogicBroker Commerce API.
@@ -116,16 +126,6 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
-    AcknowledgementsResponse:
-      type: object
-      description: Paginated list of order acknowledgements.
-      properties:
-        TotalResults:
-          type: integer
-        Body:
-          type: array
-          items:
-            type: object
     AcknowledgementRequest:
       type: object
       description: Request body for creating an order acknowledgement (EDI 855).
