@@ -98,6 +98,19 @@ components:
         type: integer
         format: int64
   schemas:
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     OrdersResponse:
       type: object
       description: Paginated list of purchase orders.
@@ -182,19 +195,6 @@ components:
         UOM:
           type: string
           description: Unit of measure.
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
   securitySchemes:
     apiKeyAuth:
       type: apiKey

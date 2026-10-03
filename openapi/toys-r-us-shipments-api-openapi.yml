@@ -85,24 +85,19 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ImportResponse:
+    Error:
       type: object
-      description: Response returned after a successful document import operation.
+      description: Standard error response from the LogicBroker Commerce API.
       properties:
-        Body:
-          type: object
-          description: The imported document body.
-        Errors:
-          type: array
-          description: List of validation errors if any occurred.
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
         StatusCode:
           type: integer
-          description: HTTP status code of the import result.
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     ShipmentRequest:
       type: object
       description: Request body for creating a shipment notification (EDI 856).
@@ -154,19 +149,24 @@ components:
                       type: integer
                     Quantity:
                       type: number
-    Error:
+    ImportResponse:
       type: object
-      description: Standard error response from the LogicBroker Commerce API.
+      description: Response returned after a successful document import operation.
       properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
         StatusCode:
           type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
+          description: HTTP status code of the import result.
     ShipmentsResponse:
       type: object
       description: Paginated list of shipment notifications.

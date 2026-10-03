@@ -79,36 +79,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ProductRequest:
+    ProductsResponse:
       type: object
-      description: Request body for creating or updating a product catalog item.
-      required:
-      - SupplierSKU
-      - Description
+      description: Paginated list of product catalog items.
       properties:
-        SupplierSKU:
-          type: string
-          description: The vendor's unique product identifier.
-        UPC:
-          type: string
-          description: Universal Product Code.
-        Description:
-          type: string
-          description: Product title or description.
-        UnitPrice:
-          type: number
-          format: double
-          description: Wholesale unit price.
-        MSRP:
-          type: number
-          format: double
-          description: Manufacturer's suggested retail price.
-        InStock:
-          type: boolean
-          description: Whether the product is currently in stock.
-        Quantity:
+        TotalResults:
           type: integer
-          description: Available inventory quantity.
+        Body:
+          type: array
+          items:
+            type: object
     Error:
       type: object
       description: Standard error response from the LogicBroker Commerce API.
@@ -140,16 +120,36 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
-    ProductsResponse:
+    ProductRequest:
       type: object
-      description: Paginated list of product catalog items.
+      description: Request body for creating or updating a product catalog item.
+      required:
+      - SupplierSKU
+      - Description
       properties:
-        TotalResults:
+        SupplierSKU:
+          type: string
+          description: The vendor's unique product identifier.
+        UPC:
+          type: string
+          description: Universal Product Code.
+        Description:
+          type: string
+          description: Product title or description.
+        UnitPrice:
+          type: number
+          format: double
+          description: Wholesale unit price.
+        MSRP:
+          type: number
+          format: double
+          description: Manufacturer's suggested retail price.
+        InStock:
+          type: boolean
+          description: Whether the product is currently in stock.
+        Quantity:
           type: integer
-        Body:
-          type: array
-          items:
-            type: object
+          description: Available inventory quantity.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
