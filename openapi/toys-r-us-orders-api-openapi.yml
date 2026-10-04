@@ -88,29 +88,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  parameters:
-    Key:
-      name: key
-      in: path
-      required: true
-      description: The unique LogicBroker document key identifier.
-      schema:
-        type: integer
-        format: int64
   schemas:
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
     OrdersResponse:
       type: object
       description: Paginated list of purchase orders.
@@ -125,6 +103,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Order'
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     Order:
       type: object
       description: A purchase order document in EDI 850 format.
@@ -195,6 +186,15 @@ components:
         UOM:
           type: string
           description: Unit of measure.
+  parameters:
+    Key:
+      name: key
+      in: path
+      required: true
+      description: The unique LogicBroker document key identifier.
+      schema:
+        type: integer
+        format: int64
   securitySchemes:
     apiKeyAuth:
       type: apiKey

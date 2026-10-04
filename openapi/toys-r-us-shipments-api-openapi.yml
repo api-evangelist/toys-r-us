@@ -85,19 +85,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
     ShipmentRequest:
       type: object
       description: Request body for creating a shipment notification (EDI 856).
@@ -149,6 +136,19 @@ components:
                       type: integer
                     Quantity:
                       type: number
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.

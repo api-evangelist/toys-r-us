@@ -98,16 +98,6 @@ components:
         Id:
           type: string
           description: Unique error trace identifier.
-    InvoicesResponse:
-      type: object
-      description: Paginated list of invoices.
-      properties:
-        TotalResults:
-          type: integer
-        Body:
-          type: array
-          items:
-            type: object
     InvoiceRequest:
       type: object
       description: Request body for creating an invoice (EDI 810).
@@ -141,6 +131,16 @@ components:
                 format: double
               UOM:
                 type: string
+    InvoicesResponse:
+      type: object
+      description: Paginated list of invoices.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.

@@ -85,37 +85,16 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    AcknowledgementRequest:
+    AcknowledgementsResponse:
       type: object
-      description: Request body for creating an order acknowledgement (EDI 855).
-      required:
-      - PartnerPO
-      - Lines
+      description: Paginated list of order acknowledgements.
       properties:
-        PartnerPO:
-          type: string
-          description: The retailer's purchase order number being acknowledged.
-        Lines:
+        TotalResults:
+          type: integer
+        Body:
           type: array
-          description: Line item acknowledgements.
           items:
             type: object
-            properties:
-              LineNumber:
-                type: integer
-              AckCode:
-                type: string
-                description: 'Acknowledgement code: IA (Accept), IQ (Quantity Changed), IB (Item Backordered), IC (Item Cancelled).'
-                enum:
-                - IA
-                - IQ
-                - IB
-                - IC
-              Quantity:
-                type: number
-              UnitPrice:
-                type: number
-                format: double
     Error:
       type: object
       description: Standard error response from the LogicBroker Commerce API.
@@ -147,16 +126,37 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
-    AcknowledgementsResponse:
+    AcknowledgementRequest:
       type: object
-      description: Paginated list of order acknowledgements.
+      description: Request body for creating an order acknowledgement (EDI 855).
+      required:
+      - PartnerPO
+      - Lines
       properties:
-        TotalResults:
-          type: integer
-        Body:
+        PartnerPO:
+          type: string
+          description: The retailer's purchase order number being acknowledged.
+        Lines:
           type: array
+          description: Line item acknowledgements.
           items:
             type: object
+            properties:
+              LineNumber:
+                type: integer
+              AckCode:
+                type: string
+                description: 'Acknowledgement code: IA (Accept), IQ (Quantity Changed), IB (Item Backordered), IC (Item Cancelled).'
+                enum:
+                - IA
+                - IQ
+                - IB
+                - IC
+              Quantity:
+                type: number
+              UnitPrice:
+                type: number
+                format: double
   securitySchemes:
     apiKeyAuth:
       type: apiKey

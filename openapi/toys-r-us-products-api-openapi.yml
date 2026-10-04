@@ -79,6 +79,36 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ProductRequest:
+      type: object
+      description: Request body for creating or updating a product catalog item.
+      required:
+      - SupplierSKU
+      - Description
+      properties:
+        SupplierSKU:
+          type: string
+          description: The vendor's unique product identifier.
+        UPC:
+          type: string
+          description: Universal Product Code.
+        Description:
+          type: string
+          description: Product title or description.
+        UnitPrice:
+          type: number
+          format: double
+          description: Wholesale unit price.
+        MSRP:
+          type: number
+          format: double
+          description: Manufacturer's suggested retail price.
+        InStock:
+          type: boolean
+          description: Whether the product is currently in stock.
+        Quantity:
+          type: integer
+          description: Available inventory quantity.
     ProductsResponse:
       type: object
       description: Paginated list of product catalog items.
@@ -120,36 +150,6 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
-    ProductRequest:
-      type: object
-      description: Request body for creating or updating a product catalog item.
-      required:
-      - SupplierSKU
-      - Description
-      properties:
-        SupplierSKU:
-          type: string
-          description: The vendor's unique product identifier.
-        UPC:
-          type: string
-          description: Universal Product Code.
-        Description:
-          type: string
-          description: Product title or description.
-        UnitPrice:
-          type: number
-          format: double
-          description: Wholesale unit price.
-        MSRP:
-          type: number
-          format: double
-          description: Manufacturer's suggested retail price.
-        InStock:
-          type: boolean
-          description: Whether the product is currently in stock.
-        Quantity:
-          type: integer
-          description: Available inventory quantity.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
