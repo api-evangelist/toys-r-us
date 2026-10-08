@@ -187,6 +187,12 @@ apis:
   - type: SwaggerStage
     url: https://stage.commerceapi.io/swagger/ui/index
 common:
+  - type: Plans
+    url: plans/toys-r-us-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/toys-r-us-rate-limits.yml
+  - type: FinOps
+    url: finops/toys-r-us-finops.yml
   - type: CapabilityMap
     url: capabilities/toys-r-us-capability-edges.yml
     name: Toys R Us Business Capability Map
