@@ -109,29 +109,6 @@ components:
         Quantity:
           type: integer
           description: Available inventory quantity.
-    ProductsResponse:
-      type: object
-      description: Paginated list of product catalog items.
-      properties:
-        TotalResults:
-          type: integer
-        Body:
-          type: array
-          items:
-            type: object
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.
@@ -150,6 +127,29 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
+    ProductsResponse:
+      type: object
+      description: Paginated list of product catalog items.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
   securitySchemes:
     apiKeyAuth:
       type: apiKey

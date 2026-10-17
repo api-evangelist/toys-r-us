@@ -95,19 +95,6 @@ components:
           type: array
           items:
             type: object
-    Error:
-      type: object
-      description: Standard error response from the LogicBroker Commerce API.
-      properties:
-        StatusCode:
-          type: integer
-          description: HTTP status code.
-        Message:
-          type: string
-          description: Human-readable error description.
-        Id:
-          type: string
-          description: Unique error trace identifier.
     ImportResponse:
       type: object
       description: Response returned after a successful document import operation.
@@ -126,6 +113,19 @@ components:
         StatusCode:
           type: integer
           description: HTTP status code of the import result.
+    Error:
+      type: object
+      description: Standard error response from the LogicBroker Commerce API.
+      properties:
+        StatusCode:
+          type: integer
+          description: HTTP status code.
+        Message:
+          type: string
+          description: Human-readable error description.
+        Id:
+          type: string
+          description: Unique error trace identifier.
     AcknowledgementRequest:
       type: object
       description: Request body for creating an order acknowledgement (EDI 855).

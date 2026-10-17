@@ -85,6 +85,24 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    ImportResponse:
+      type: object
+      description: Response returned after a successful document import operation.
+      properties:
+        Body:
+          type: object
+          description: The imported document body.
+        Errors:
+          type: array
+          description: List of validation errors if any occurred.
+          items:
+            type: object
+            properties:
+              Message:
+                type: string
+        StatusCode:
+          type: integer
+          description: HTTP status code of the import result.
     Error:
       type: object
       description: Standard error response from the LogicBroker Commerce API.
@@ -98,6 +116,16 @@ components:
         Id:
           type: string
           description: Unique error trace identifier.
+    InvoicesResponse:
+      type: object
+      description: Paginated list of invoices.
+      properties:
+        TotalResults:
+          type: integer
+        Body:
+          type: array
+          items:
+            type: object
     InvoiceRequest:
       type: object
       description: Request body for creating an invoice (EDI 810).
@@ -131,34 +159,6 @@ components:
                 format: double
               UOM:
                 type: string
-    InvoicesResponse:
-      type: object
-      description: Paginated list of invoices.
-      properties:
-        TotalResults:
-          type: integer
-        Body:
-          type: array
-          items:
-            type: object
-    ImportResponse:
-      type: object
-      description: Response returned after a successful document import operation.
-      properties:
-        Body:
-          type: object
-          description: The imported document body.
-        Errors:
-          type: array
-          description: List of validation errors if any occurred.
-          items:
-            type: object
-            properties:
-              Message:
-                type: string
-        StatusCode:
-          type: integer
-          description: HTTP status code of the import result.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
